@@ -11,5 +11,5 @@ debug ("wasm_file_buf size = %d\r\n", wasm_file_size);
 
 **示例截图：**
 
-![dump](E:\github\dump\img\dump.png)
+![dump](dump.png)
 
