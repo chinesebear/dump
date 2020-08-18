@@ -27,25 +27,25 @@ Description: dump/debug funtions for logs.
 
 #include "log.h"
 
-void log_printf (const char* pLogTag, unsigned int uiLine, char *LogFmtBuf, ...)
+void log_printf (const char* pFileName, unsigned int uiLine, const char* pFnucName, char *LogFmtBuf, ...)
 {
 	va_list args;
-	if(pLogTag == NULL || uiLine == 0 || LogFmtBuf == NULL)
+	if(pFileName == NULL || uiLine == 0 || LogFmtBuf == NULL)
 	{
 		return ;
 	}
     char logbuf[256];
 	memset (logbuf,'\0',256);
-	sprintf (logbuf,"%s:%d, ", pLogTag, uiLine);	
+	sprintf (logbuf,"%s:%d, %s(), ", pFileName, uiLine, pFnucName);	
 	printf ("%s",logbuf);
 	memset (logbuf,'\0',256);
 	va_start (args, LogFmtBuf);
 	vsnprintf (logbuf, 256, LogFmtBuf, args); 
 	va_end (args);
-	printf ("%s",logbuf);
+	printf ("%s\r\n",logbuf);
 }
 
-void log_data(const char *pLogTag, unsigned int uiLine, const char *pcStr,unsigned char *pucBuf,unsigned int usLen)
+void log_data(const char *pFileName, unsigned int uiLine, const char* pFnucName, const char *pcStr,unsigned char *pucBuf,unsigned int usLen)
 {
     unsigned int i;
     unsigned char acTmp[17];
@@ -54,8 +54,7 @@ void log_data(const char *pLogTag, unsigned int uiLine, const char *pcStr,unsign
 
     if(pcStr)
     {
-        log_printf (pLogTag, uiLine,"[%s]: length = %d (0x%X)\r\n",pcStr, usLen, usLen);
-        printf("\r\n");
+        log_printf (pFileName, uiLine, pFnucName, "[%s]: length = %d (0x%X)\r\n",pcStr, usLen, usLen);
     }
     if(usLen == 0)
     {

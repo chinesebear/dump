@@ -6,10 +6,10 @@
 ```c
 /* 接口示例 */
 dump ("wasm_file_buf", wasm_file_buf, wasm_file_size);
-debug ("wasm_file_buf size = %d\r\n", wasm_file_size);
+debug ("signature:%s",signature);
 ```
 
 **示例截图：**
 
-![dump](./img/1.png)
+![dump](img/1.png)
 
