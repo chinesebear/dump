@@ -27,7 +27,7 @@ Description: dump/debug funtions for logs.
 
 #include "log.h"
 
-void log_printf (const char* pFileName, unsigned int uiLine, const char* pFnucName, char *LogFmtBuf, ...)
+void log_printf (const char* pFileName, unsigned int uiLine, const char* pFnucName, const char *pFlag, char *LogFmtBuf, ...)
 {
 	va_list args;
 	if(pFileName == NULL || uiLine == 0 || LogFmtBuf == NULL)
@@ -36,7 +36,7 @@ void log_printf (const char* pFileName, unsigned int uiLine, const char* pFnucNa
 	}
     char logbuf[256];
 	memset (logbuf,'\0',256);
-	sprintf (logbuf,"%s:%d, %s(), ", pFileName, uiLine, pFnucName);	
+	sprintf (logbuf,"%s:%d, %s(), %s, ", pFileName, uiLine, pFnucName, pFlag);
 	printf ("%s",logbuf);
 	memset (logbuf,'\0',256);
 	va_start (args, LogFmtBuf);
@@ -54,7 +54,7 @@ void log_data(const char *pFileName, unsigned int uiLine, const char* pFnucName,
 
     if(pcStr)
     {
-        log_printf (pFileName, uiLine, pFnucName, "[%s]: length = %d (0x%X)\r\n",pcStr, usLen, usLen);
+        log_printf (pFileName, uiLine, pFnucName, "<dump>", "[%s]: length = %d (0x%X)\r\n",pcStr, usLen, usLen);
     }
     if(usLen == 0)
     {
